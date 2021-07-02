@@ -8,16 +8,32 @@
     "markdown-it",
     "markdown"
   ],
+  "homepage": "https://github.com/commenthol/markdown-it-admon#readme",
+  "bugs": {
+    "url": "https://github.com/commenthol/markdown-it-admon/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/commenthol/markdown-it-admon.git"
+  },
   "license": "MIT",
+  "author": "",
   "maintainers": [
     "commenthol <commenthol@gmail.com>"
   ],
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "example",
+    "test": "test"
+  },
   "scripts": {
     "prepublishOnly": "make",
     "lint": "eslint --fix .",
     "test": "c8 mocha",
     "coverage": "npm run test && c8 report --reporter html"
   },
+  "dependencies": {},
   "devDependencies": {
     "browserify": "^17.0.0",
     "c8": "^7.7.3",
@@ -26,7 +42,7 @@
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "markdown-it": "markdown-it/markdown-it",
+    "markdown-it": "^12.1.0",
     "markdown-it-testgen": "~0.1.6",
     "mocha": "^9.0.1",
     "terser": "^5.7.1"
