@@ -1,0 +1,7 @@
+coverage/
+example/
+test/
+Makefile
+.*
+*.log
+*.tgz

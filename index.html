@@ -1,0 +1,426 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: sans-serif; }
+blockquote {
+  color: grey;
+  border-left: 5px solid rgba(0,0,0,0.25);
+  border-radius: 3px;
+  margin: 0 auto;
+  padding-left: 1em;
+  font-style: italic;
+}
+pre {
+  padding: 0.5em;
+  background-color: rgba(0,0,0,0.1);
+}
+/**
+ * @credits https://github.com/qjebbs/vscode-markdown-extended
+ * @copyright 2018 jebbs
+ * @license MIT
+ */
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v92/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.admonition {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12), 0 3px 1px -2px rgba(0, 0, 0, .2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid rgba(68, 138, 255, .8);
+  border-radius: .2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  overflow: auto;
+}
+
+.admonition>p {
+  margin-top: .8rem;
+}
+
+.admonition>.admonition-title {
+  margin: 0 -1.2rem;
+  padding: .8rem 1.0rem .8rem 1.0rem;
+  border-bottom: 1px solid rgba(68, 138, 255, .2);
+  background-color: rgba(68, 138, 255, .1);
+  font-weight: 700;
+}
+
+.admonition>.admonition-title:before {
+  position: absolute;
+  left: 1.0rem;
+  font-size: 1.5rem;
+  /* color: rgba(68, 138, 255, .8); */
+  /* content: "\f05b"; */
+}
+
+.admonition>.admonition-title:before {
+  font-family: Material Icons;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 1.2rem;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
+
+.admonition.note>.admonition-title {
+  padding-left: 3.3rem;
+}
+
+.admonition.note>.admonition-title:before {
+  color: rgba(68, 138, 255, .8);
+  content: "\f05b";
+}
+
+.admonition.summary, .admonition.abstract, .admonition.tldr {
+  border-left-color: rgba(0, 176, 255, .8);
+}
+
+.admonition.summary>.admonition-title, .admonition.abstract>.admonition-title, .admonition.tldr>.admonition-title {
+  background-color: rgba(0, 176, 255, .1);
+  border-bottom-color: rgba(0, 176, 255, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.summary>.admonition-title:before, .admonition.abstract>.admonition-title:before, .admonition.tldr>.admonition-title:before {
+  color: rgba(0, 176, 255, 1);
+  content: "\E8D2";
+}
+
+.admonition.hint, .admonition.tip {
+  border-left-color: rgba(0, 191, 165, .8);
+}
+
+.admonition.hint>.admonition-title, .admonition.tip>.admonition-title {
+  background-color: rgba(0, 191, 165, .1);
+  border-bottom-color: rgba(0, 191, 165, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.hint>.admonition-title:before, .admonition.tip>.admonition-title:before {
+  color: rgba(0, 191, 165, 1);
+  content: "\E80E";
+}
+
+.admonition.info, .admonition.todo {
+  border-left-color: rgba(0, 184, 212, .8);
+}
+
+.admonition.info>.admonition-title, .admonition.todo>.admonition-title {
+  background-color: rgba(0, 184, 212, .1);
+  border-bottom-color: rgba(0, 184, 212, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.info>.admonition-title:before, .admonition.todo>.admonition-title:before {
+  color: rgba(0, 184, 212, 1);
+  content: "\E88E";
+}
+
+.admonition.success, .admonition.check, .admonition.done {
+  border-left-color: rgba(0, 200, 83, .8);
+}
+
+.admonition.success>.admonition-title, .admonition.check>.admonition-title, .admonition.done>.admonition-title {
+  background-color: rgba(0, 200, 83, .1);
+  border-bottom-color: rgba(0, 200, 83, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.success>.admonition-title:before, .admonition.check>.admonition-title:before, .admonition.done>.admonition-title:before {
+  color: rgba(0, 200, 83, 1);
+  content: "\E876";
+}
+
+.admonition.question, .admonition.help, .admonition.faq {
+  border-left-color: rgba(100, 221, 23, .8);
+}
+
+.admonition.question>.admonition-title, .admonition.help>.admonition-title, .admonition.faq>.admonition-title {
+  background-color: rgba(100, 221, 23, .1);
+  border-bottom-color: rgba(100, 221, 23, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.question>.admonition-title:before, .admonition.help>.admonition-title:before, .admonition.faq>.admonition-title:before {
+  color: rgba(100, 221, 23, 1);
+  content: "\E887";
+}
+
+.admonition.warning, .admonition.attention, .admonition.caution {
+  border-left-color: rgba(255, 145, 0, .8);
+}
+
+.admonition.warning>.admonition-title, .admonition.attention>.admonition-title, .admonition.caution>.admonition-title {
+  background-color: rgba(255, 145, 0, .1);
+  border-bottom-color: rgba(255, 145, 0, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.attention>.admonition-title:before {
+  color: rgba(255, 145, 0, 1);
+  content: "\E417";
+}
+
+.admonition.warning>.admonition-title:before, .admonition.caution>.admonition-title:before {
+  color: rgba(255, 145, 0, 1);
+  content: "\E002";
+}
+
+.admonition.failure, .admonition.fail, .admonition.missing {
+  border-left-color: rgba(255, 82, 82, .8);
+}
+
+.admonition.failure>.admonition-title, .admonition.fail>.admonition-title, .admonition.missing>.admonition-title {
+  background-color: rgba(255, 82, 82, .1);
+  border-bottom-color: rgba(255, 82, 82, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.failure>.admonition-title:before, .admonition.fail>.admonition-title:before, .admonition.missing>.admonition-title:before {
+  color: rgba(255, 82, 82, 1);
+  content: "\E14C";
+}
+
+.admonition.danger, .admonition.error, .admonition.bug {
+  border-left-color: rgba(255, 23, 68, .8);
+}
+
+.admonition.danger>.admonition-title, .admonition.error>.admonition-title, .admonition.bug>.admonition-title {
+  background-color: rgba(255, 23, 68, .1);
+  border-bottom-color: rgba(255, 23, 68, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.danger>.admonition-title:before {
+  color: rgba(255, 23, 68, 1);
+  content: "\E3E7";
+}
+
+.admonition.error>.admonition-title:before {
+  color: rgba(255, 23, 68, 1);
+  content: "\e000";
+}
+
+.admonition.bug>.admonition-title:before {
+  color: rgba(255, 23, 68, 1);
+  content: "\E868";
+}
+
+.admonition.example, .admonition.snippet {
+  border-left-color: rgba(0, 184, 212, .8);
+}
+
+.admonition.example>.admonition-title, .admonition.snippet>.admonition-title {
+  background-color: rgba(0, 184, 212, .1);
+  border-bottom-color: rgba(0, 184, 212, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.example>.admonition-title:before, .admonition.snippet>.admonition-title:before {
+  color: rgba(0, 184, 212, 1);
+  content: "\e86f";
+}
+
+.admonition.quote, .admonition.cite {
+  border-left-color: rgba(158, 158, 158, .8);
+}
+
+.admonition.quote>.admonition-title, .admonition.cite>.admonition-title {
+  background-color: rgba(158, 158, 158, .1);
+  border-bottom-color: rgba(158, 158, 158, .2);
+  padding-left: 3.3rem;
+}
+
+.admonition.quote>.admonition-title:before, .admonition.cite>.admonition-title:before {
+  color: rgba(158, 158, 158, 1);
+  content: "\E244";
+}
+</style>
+</head>
+<body>
+<style>
+table { width: 100%; }
+tr { vertical-align: top; }
+td { padding: 1em; }
+</style>
+<h1>Admonition types</h1>
+<table>
+<tr><td>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a note</p>
+</div>
+<div class="admonition summary">
+<p class="admonition-title">Summary</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Abstract</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition tldr">
+<p class="admonition-title">Tldr</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition todo">
+<p class="admonition-title">Todo</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition check">
+<p class="admonition-title">Check</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition done">
+<p class="admonition-title">Done</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Question</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition help">
+<p class="admonition-title">Help</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition faq">
+<p class="admonition-title">Faq</p>
+<p>Lorem ipsum</p>
+</div>
+</td><td>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition fail">
+<p class="admonition-title">Fail</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition missing">
+<p class="admonition-title">Missing</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Here will be dragons</p>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition bug">
+<p class="admonition-title">Bug</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition snippet">
+<p class="admonition-title">Snippet</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition quote">
+<p class="admonition-title">Quote</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition cite">
+<p class="admonition-title">Cite</p>
+<p>Lorem ipsum</p>
+</div>
+<div class="admonition unknown">
+<p class="admonition-title">Unknown</p>
+<p>Lorem ipsum</p>
+</div>
+</td></tr>
+</table>
+<h2>Usage and Variants</h2>
+<pre><code>!!! note
+    This is a note
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a note</p>
+</div>
+<pre><code>!!! note With custom title
+    This is a note
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">With custom title</p>
+<p>This is a note</p>
+</div>
+<pre><code>!!! note &quot;&quot;
+    This note has no title
+</code></pre>
+<div class="admonition note">
+<p>This note has no title</p>
+</div>
+<blockquote>
+<p>Note in blockquote</p>
+<div class="admonition note">
+<p class="admonition-title">in blockquote</p>
+<p>Lorem ipsum</p>
+</div>
+<p>end of quote...</p>
+</blockquote>
+<p>Admonitions in list</p>
+<ul>
+<li>
+<div class="admonition note">
+<p class="admonition-title">Note in list</p>
+<p>Lorem ipsum</p>
+</div>
+</li>
+<li>
+<div class="admonition done">
+<p>I am done</p>
+</div>
+</li>
+<li>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>...</p>
+</div>
+</li>
+</ul>
+
+</body>
+</html>
+
