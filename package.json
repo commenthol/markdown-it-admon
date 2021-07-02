@@ -1,6 +1,6 @@
 {
   "name": "markdown-it-admon",
-  "version": "1.0.0-0",
+  "version": "1.0.0",
   "description": "Plugin to create admonitions for markdown-it markdown parser",
   "keywords": [
     "admonition",
