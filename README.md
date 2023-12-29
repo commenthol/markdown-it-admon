@@ -52,7 +52,7 @@ Params:
 
 - __name__ - container name (mandatory)
 - __options?:__
-   - __render__ - optional, renderer function for opening/closing tokens.
+  - __render__ - optional, renderer function for opening/closing tokens.
 
 
 ## License
@@ -62,7 +62,13 @@ Params:
 
 ## References
 
-!ref
+<!-- !ref -->
+
+* [python-markdown][python-markdown]
+* [rST][rST]
+* [vscode-markdown-extended][vscode-markdown-extended]
+
+<!-- ref! -->
 
 [python-markdown]: https://python-markdown.github.io/extensions/admonition/
 
